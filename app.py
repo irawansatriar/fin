@@ -1,6 +1,23 @@
+# file: app.py (temporary debug snippet — add at the very top)
+import traceback
+import streamlit as st
+
+try:
+    # keep your normal imports here after the try
+    from db import user_count
+    # ... any other imports your app uses
+except Exception as e:
+    st.set_page_config(page_title="Import error (debug)", layout="wide")
+    st.title("Import / Startup Error — debug output")
+    st.error(f"Import failed: {e}")
+    st.code(traceback.format_exc())
+    # stop further execution so the UI stays visible with the traceback
+    st.stop()
+
 # file: app.py (edit login_ui function)
 from db import user_count
 from auth import create_user
+
 
 def login_ui():
     st.title("Personal Finance — Login / Register")
@@ -36,3 +53,4 @@ def login_ui():
                 st.experimental_rerun()
             else:
                 st.error("Invalid credentials")
+
