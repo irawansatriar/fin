@@ -1,17 +1,11 @@
 # file: db.py
 
-from models import SessionLocal, User
-# from models import SessionLocal, Account, Transaction, User
+from models import SessionLocal, Account, Transaction, User
 from sqlalchemy.orm import Session
 import datetime
 import json
 
-def user_count():
-    db = SessionLocal()
-    try:
-        return db.query(User).count()
-    finally:
-        db.close()
+
 
 
 def create_account(user_id: int, name: str, acct_type: str = "checking", balance=0):
@@ -83,3 +77,4 @@ def export_user_json(user_id: int):
     db.close()
 
     return data
+
